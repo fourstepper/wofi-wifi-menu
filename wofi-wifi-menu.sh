@@ -21,7 +21,8 @@ fi
 
 LIST=$(nmcli --fields "$FIELDS" device wifi list | sed '/^--/d')
 # For some reason wofi always approximates character width 2 short... hmmm
-RWIDTH=$(($(echo "$LIST" | head -n 1 | awk '{print length($0); }')+2))
+RWIDTH=$(($(echo "$LIST" | head -n 1 | awk '{print length($0); }')*10))
+echo $RWIDTH
 # Dynamically change the height of the wofi menu
 LINENUM=$(echo "$LIST" | wc -l)
 # Gives a list of known connections so we can parse it later
@@ -51,8 +52,7 @@ elif [[ "$CONSTATE" =~ "disabled" ]]; then
 fi
 
 
-
-CHENTRY=$(echo -e "$TOGGLE\nmanual\n$LIST" | uniq -u | wofi -d dmenu "Wi-Fi SSID: " -lines "$LINENUM" -a "$HIGHLINE" -location "$POSITION" -yoffset "$YOFF" -xoffset "$XOFF" -font "$FONT" -width -"$RWIDTH")
+CHENTRY=$(echo -e "$TOGGLE\nmanual\n$LIST" | uniq -u | wofi -i -d --prompt "Wi-Fi SSID: " --lines "$LINENUM" --location "$POSITION" --yoffset "$YOFF" --xoffset "$XOFF" --width $RWIDTH)
 #echo "$CHENTRY"
 CHSSID=$(echo "$CHENTRY" | sed  's/\s\{2,\}/\|/g' | awk -F "|" '{print $1}')
 #echo "$CHSSID"
@@ -60,7 +60,7 @@ CHSSID=$(echo "$CHENTRY" | sed  's/\s\{2,\}/\|/g' | awk -F "|" '{print $1}')
 # If the user inputs "manual" as their SSID in the start window, it will bring them to this screen
 if [ "$CHENTRY" = "manual" ] ; then
 	# Manual entry of the SSID and password (if appplicable)
-	MSSID=$(echo "enter the SSID of the network (SSID,password)" | wofi -d "Manual Entry: " -font "$FONT" -lines 1)
+	MSSID=$(echo "enter the SSID of the network (SSID,password)" | wofi -d "Manual Entry: " -lines 1)
 	# Separating the password from the entered string
 	MPASS=$(echo "$MSSID" | awk -F "," '{print $2}')
 
@@ -92,7 +92,7 @@ else
 		nmcli con up "$CHSSID"
 	else
 		if [[ "$CHENTRY" =~ "WPA2" ]] || [[ "$CHENTRY" =~ "WEP" ]]; then
-			WIFIPASS=$(echo "if connection is stored, hit enter" | wofi -d "password: " -lines 1 -font "$FONT" )
+			WIFIPASS=$(echo "if connection is stored, hit enter" | wofi -P -d --prompt "password" --lines 1 --location "$POSITION" --yoffset "$YOFF" --xoffset "$XOFF" --width 20%)
 		fi
 		nmcli dev wifi con "$CHSSID" password "$WIFIPASS"
 	fi
