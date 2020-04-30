@@ -22,6 +22,19 @@ git clone https://github.com/fourstepper/wofi-wifi-menu.git
 cd wofi-wifi-menu
 bash "./wofi-wifi-menu.sh"
 ```
+#### Arch Linux
+There's an AUR package available for Arch Linux. You can install it using [yay](https://github.com/Jguer/yay).
+```bash
+#install package from AUR
+yay -S wofi-wifi-menu-git
+
+#copy default config
+cp /usr/share/wofi/wifi.example ~/.config/wofi/wifi
+
+#run wofi-wifi-menu
+wofi-wifi-menu
+```
+
 
 ### Configuration
 
