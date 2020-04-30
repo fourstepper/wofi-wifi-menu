@@ -16,7 +16,7 @@ directory of personal choice
 
 ```
 cd DESIRED_DIRECTORY
-git clone https://github.com/RobinOpletal/wofi-wifi-menu.git
+git clone https://github.com/fourstepper/wofi-wifi-menu.git
 cd wofi-wifi-menu
 bash "./wofi-wifi-menu.sh"
 ```
