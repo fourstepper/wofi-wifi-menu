@@ -14,6 +14,3 @@ XOFF=0
 
 #fields to be displayed
 FIELDS=SSID,SECURITY,BARS
-
-#font
-FONT="DejaVu Sans Mono 8"
