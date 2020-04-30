@@ -2,7 +2,9 @@
 
 A wifi menu primarily designed for use with Sway. Uses wofi and nmcli
 
-* nmcli
+### Dependencies
+
+* nmcli (networkmanager)
 * iw
 * wofi
 * bash
