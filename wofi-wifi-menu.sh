@@ -22,7 +22,6 @@ fi
 LIST=$(nmcli --fields "$FIELDS" device wifi list | sed '/^--/d')
 # For some reason wofi always approximates character width 2 short... hmmm
 RWIDTH=$(($(echo "$LIST" | head -n 1 | awk '{print length($0); }')*10))
-echo $RWIDTH
 # Dynamically change the height of the wofi menu
 LINENUM=$(echo "$LIST" | wc -l)
 # Gives a list of known connections so we can parse it later
@@ -92,7 +91,7 @@ else
 		nmcli con up "$CHSSID"
 	else
 		if [[ "$CHENTRY" =~ "WPA2" ]] || [[ "$CHENTRY" =~ "WEP" ]]; then
-			WIFIPASS=$(echo "if connection is stored, hit enter" | wofi -P -d --prompt "password" --lines 1 --location "$POSITION" --yoffset "$YOFF" --xoffset "$XOFF" --width 20%)
+			WIFIPASS=$(echo "if connection is stored, hit enter" | wofi -P -d --prompt "password" --lines 1 --location "$POSITION" --yoffset "$YOFF" --xoffset "$XOFF" --width $RWIDTH)
 		fi
 		nmcli dev wifi con "$CHSSID" password "$WIFIPASS"
 	fi
