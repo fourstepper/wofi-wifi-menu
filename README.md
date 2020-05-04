@@ -2,6 +2,8 @@
 
 A wifi menu primarily designed for use with Sway. Uses wofi and nmcli
 
+[![Gitter](https://badges.gitter.im/wofi-wifi-menu/community.svg)](https://gitter.im/wofi-wifi-menu/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 ### Dependencies
 
 * nmcli (networkmanager)
