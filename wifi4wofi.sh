@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
-
+#
+#This is a fork of wofi-wifi-menu from fourstepper at https://github.com/fourstepper/wofi-wifi-menu,
+#which is a fork of rofi-wifi-menu from zbaylin at https://github.com/zbaylin/rofi-wifi-menu.
+#
+#This fork was done by Michael Williams of Fearless Geek Media.
+#
 # Starts a scan of available broadcasting SSIDs
 # nmcli dev wifi rescan
 
@@ -24,7 +29,7 @@ RWIDTH=$(($(echo "$LIST" | head -n 1 | awk '{print length($0); }')*10))
 # Dynamically change the height of the wofi menu
 LINENUM=$(echo "$LIST" | wc -l)
 # Gives a list of known connections so we can parse it later
-KNOWNCON=$(nmcli connection show)
+CONNECTIONS=$(nmcli connection show)
 # Really janky way of telling if there is currently a connection
 CONSTATE=$(nmcli -fields WIFI g)
 
@@ -54,6 +59,7 @@ CHENTRY=$(echo -e "$TOGGLE\nmanual\n$LIST" | uniq -u | wofi -i -d --prompt "Wi-F
 #echo "$CHENTRY"
 CHSSID=$(echo "$CHENTRY" | sed  's/\s\{2,\}/\|/g' | awk -F "|" '{print $1}')
 #echo "$CHSSID"
+KNOWNCON=$(echo $CONNECTIONS | grep -c "$CHSSID")
 
 # If the user inputs "manual" as their SSID in the start window, it will bring them to this screen
 if [ "$CHENTRY" = "manual" ] ; then
@@ -86,7 +92,7 @@ else
 	fi
 
 	# Parses the list of preconfigured connections to see if it already contains the chosen SSID. This speeds up the connection process
-	if [[ $(echo "$KNOWNCON" | grep "$CHSSID") = "$CHSSID" ]]; then
+	if [[ $KNOWNCON = 1 ]]; then
 		nmcli con up "$CHSSID"
 	else
 		if [[ "$CHENTRY" =~ "WPA2" ]] || [[ "$CHENTRY" =~ "WEP" ]]; then

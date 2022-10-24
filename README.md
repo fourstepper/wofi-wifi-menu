@@ -1,10 +1,8 @@
-# wofi-wifi-menu
+# wifi4wofi
 
-UNMAINTAINED - I don't have the time to take care and maintain this - if anyone wants the repo, feel free to ping the issues.
+This is a fork of wofi-wifi-menu fro fourstepper at https://github.com/fourstepper/wofi-wifi-menu, which is a fork of rofi-wifi-menu from zbaylin at https://github.com/zbaylin/rofi-wifi-menu.
 
 A wifi menu primarily designed for use with Sway. Uses wofi and nmcli
-
-[![Gitter](https://badges.gitter.im/wofi-wifi-menu/community.svg)](https://gitter.im/wofi-wifi-menu/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 ### Dependencies
 
@@ -22,34 +20,17 @@ directory of personal choice
 
 ```
 cd DESIRED_DIRECTORY
-git clone https://github.com/fourstepper/wofi-wifi-menu.git
-cd wofi-wifi-menu
-bash "./wofi-wifi-menu.sh"
+git clone https://github.com/fearlessgeekmedia/wifi4wofi.git
+cd wifi4wofi
+bash "wifi4wofi.sh"
 ```
-
-#### Arch Linux
-
-There's also an AUR package available for Arch Linux. You can install it using [yay](https://github.com/Jguer/yay)
-or by using the makepkg utility.
-
-```bash
-#install package from AUR
-yay -S wofi-wifi-menu-git
-
-#copy default config
-cp /usr/share/wofi/wifi.example ~/.config/wofi/wifi
-
-#run wofi-wifi-menu
-wofi-wifi-menu
-```
-
 
 ### Configuration
 
-wofi-wifi-menu has an example configuration file in the repository. It will run
+wifi4wofi has an example configuration file in the repository. It will run
 without it, but will warn you if it does not exist.
 
-To configure wofi-wifi-menu, first cd into the directory it is installed into.
+To configure wifi4wofi, first cd into the directory it is installed into.
 Then edit the file `config.example`.
 It should contain the following variables:
 
